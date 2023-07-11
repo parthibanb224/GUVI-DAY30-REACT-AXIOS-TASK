@@ -11,7 +11,7 @@ export default function Edit() {
   useEffect(() => {
     const devEnv = process.env.NODE_ENV !== "production";
     const {REACT_APP_DEV_URL,REACT_APP_PROD_URL} = process.env;
-    Axios.get(`${devEnv? REACT_APP_DEV_URL : REACT_APP_PROD_URL}`+id)
+    Axios.get(`${devEnv? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/`+id)
     .then(res => setModifiedData(res.data))
     .catch(err => console.log(err));
   },[id])

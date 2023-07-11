@@ -49,7 +49,7 @@ function ShowUserDetails({data,handleDelete}){
           <td>{data.phone}</td>
           <td>{data.website}</td>
           <td>
-            <Link to={`/Edit/${data.id}`}><BiSolidPencil onClick={(e) => console.log(e)} className='ms-3' /></Link> 
+            <Link to={`/Edit/${data.id}`}><BiSolidPencil className='ms-3' /></Link> 
             <FaTrash onClick={() => handleDelete(data.id)} className='ms-3' />
           </td>
         </tr>

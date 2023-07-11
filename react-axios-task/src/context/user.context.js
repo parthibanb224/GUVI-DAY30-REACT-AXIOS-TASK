@@ -42,11 +42,12 @@ export default function UserContextProvider({ children }) {
 
   // Delete the Data
   const handleDelete = (id) =>{
+    console.log(id)
     const conf = window.confirm("Do You Want Delete");
     const devEnv = process.env.NODE_ENV !== "production";
     const {REACT_APP_DEV_URL,REACT_APP_PROD_URL} = process.env;
     if(conf){
-      Axios.delete(`${devEnv? REACT_APP_DEV_URL : REACT_APP_PROD_URL}`+id)
+      Axios.delete(`${devEnv? REACT_APP_DEV_URL : REACT_APP_PROD_URL}/`+id)
       .then(res => {
         alert("Your Record has been Deleted");
         navigat('/')
