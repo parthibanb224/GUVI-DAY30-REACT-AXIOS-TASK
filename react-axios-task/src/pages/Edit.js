@@ -9,7 +9,9 @@ export default function Edit() {
   const [modifiedData,setModifiedData] = useState([]);
 
   useEffect(() => {
-    Axios.get('http://localhost:3030/users/'+id)
+    const devEnv = process.env.NODE_ENV !== "production";
+    const {REACT_APP_DEV_URL,REACT_APP_PROD_URL} = process.env;
+    Axios.get(`${devEnv? REACT_APP_DEV_URL : REACT_APP_PROD_URL}`+id)
     .then(res => setModifiedData(res.data))
     .catch(err => console.log(err));
   },[id])
@@ -17,7 +19,9 @@ export default function Edit() {
   const navigate = useNavigate()
   const handleUpdate = (event) => {
     event.preventDefault();
-    Axios.put('http://localhost:3030/users/'+id,modifiedData)
+    const devEnv = process.env.NODE_ENV !== "production";
+    const {REACT_APP_DEV_URL,REACT_APP_PROD_URL} = process.env;
+    Axios.put(`${devEnv? REACT_APP_DEV_URL : REACT_APP_PROD_URL}`+id,modifiedData)
     .then(res => {
       alert('Data Update Successfully!')
       navigate('/')

@@ -19,7 +19,9 @@ export default function UserContextProvider({ children }) {
 
   // Get Value
   useEffect(() => {
-    Axios.get("http://localhost:3030/users")
+    const devEnv = process.env.NODE_ENV !== "production";
+    const {REACT_APP_DEV_URL,REACT_APP_PROD_URL} = process.env;
+    Axios.get(`${devEnv? REACT_APP_DEV_URL : REACT_APP_PROD_URL}`)
       .then(res => setUser(res.data))
       .catch(error => console.log(error));
   })
@@ -28,7 +30,9 @@ export default function UserContextProvider({ children }) {
   const navigat = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault()
-    Axios.post("http://localhost:3030/users", inputData)
+    const devEnv = process.env.NODE_ENV !== "production";
+    const {REACT_APP_DEV_URL,REACT_APP_PROD_URL} = process.env;
+    Axios.post(`${devEnv? REACT_APP_DEV_URL : REACT_APP_PROD_URL}`, inputData)
       .then(res => {
         alert("Data added Successfully");
         navigat('/');
@@ -39,8 +43,10 @@ export default function UserContextProvider({ children }) {
   // Delete the Data
   const handleDelete = (id) =>{
     const conf = window.confirm("Do You Want Delete");
+    const devEnv = process.env.NODE_ENV !== "production";
+    const {REACT_APP_DEV_URL,REACT_APP_PROD_URL} = process.env;
     if(conf){
-      Axios.delete("http://localhost:3030/users/"+id)
+      Axios.delete(`${devEnv? REACT_APP_DEV_URL : REACT_APP_PROD_URL}`+id)
       .then(res => {
         alert("Your Record has been Deleted");
         navigat('/')
