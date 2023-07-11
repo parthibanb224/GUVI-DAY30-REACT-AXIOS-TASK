@@ -24,7 +24,7 @@ export default function UserContextProvider({ children }) {
     Axios.get(`${devEnv? REACT_APP_DEV_URL : REACT_APP_PROD_URL}`)
       .then(res => setUser(res.data))
       .catch(error => console.log(error));
-  })
+  },[])
 
   // Add new Data
   const navigat = useNavigate();
